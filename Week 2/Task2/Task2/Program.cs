@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Task2
 {
     class Program
     {
-        static bool isPrime(int a) //функция для проверки на простоту числа
+        public static bool isPrime(int a)
         {
-            if (a == 1) return false;
-            for (int i = 2; i < Math.Sqrt(a); i++)
+            if (a == 1 || a == 0) return false;
+            for(int i = 2; i <= Math.Sqrt(a); i++)
             {
                 if (a % i == 0) return false;
             }
@@ -20,22 +20,22 @@ namespace Task2
         }
         static void Main(string[] args)
         {
-            StreamReader chitalka = new StreamReader("input.txt"); // открываем поток который считывает input
-            string str = chitalka.ReadToEnd(); 
-            chitalka.Close(); //закрываем поток для того чтобы файлы не повредились
-            string[] str2 = str.Split(); // создаем массив который хранит в себе все элементы отделенные между собой пробелом
-            int[] arr = new int[100000]; // задаем массиву размер 
-            for(int i = 0; i < str2.Length; i++) //пробегаемся по массиву и присваиваем значение из одного массива в другой массив, а также меняем его тип с string'a на integer
+            StreamReader read = new StreamReader("input.txt");
+            string s = read.ReadToEnd();
+            read.Close();
+            string[] s2 = s.Split();
+            int[] array = new int[100000];
+            for(int i = 0; i < s2.Length; i++)
             {
-                arr[i] = int.Parse(str2[i]);
+                array[i] = int.Parse(s2[i]);
             }
-            StreamWriter pokazhi = new StreamWriter("output.txt"); // открываем поток для нашего output'a 
-            for(int i = 0; i < str.Length; i++) //пробегаемся по массиву и ставим условия на проверку простоту числа и если таковы имеются то выводим их в output
+            StreamWriter write = new StreamWriter("output.txt");
+            for(int i = 0; i < s.Length; i++)
             {
-                if (isPrime(arr[i]))
-                    pokazhi.Write(arr[i] + " ");
+                if (isPrime(array[i]))
+                    write.Write(array[i] + " ");
             }
-            pokazhi.Close(); //закрываем поток для того чтобы файлы не повредились
+            write.Close();
             Console.ReadKey();
         }
     }
